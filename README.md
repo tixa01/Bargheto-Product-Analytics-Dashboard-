@@ -1,4 +1,4 @@
-# Bargheto-Product-Analytics-Dashboard-
+# Bargheto-Product-Analytics-Dashboard
 Product Analytics Dashboard
 
 The application is built with Angular 20 and uses Signals for state management, demonstrating best practices in modular architecture, component design, and reactive programming.
