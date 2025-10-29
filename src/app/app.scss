@@ -1,0 +1,30 @@
+@use 'variables' as project;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+main.content {
+  flex: 1; 
+  overflow-y: auto; 
+  background-color: project.$color-background;
+  padding: project.$spacing-lg 0;
+  transition: background-color 0.3s ease; 
+}
+
+:host-context(body.dark-theme) main.content {
+  background-color: #212121; 
+}

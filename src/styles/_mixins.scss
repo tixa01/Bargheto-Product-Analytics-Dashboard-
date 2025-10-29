@@ -1,0 +1,13 @@
+@use 'variables' as project;
+
+@mixin tablet {
+  @media (min-width: project.$bp-tablet) { 
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: project.$bp-desktop) {
+    @content;
+  }
+}

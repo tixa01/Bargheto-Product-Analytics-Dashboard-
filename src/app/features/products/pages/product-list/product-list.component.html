@@ -1,0 +1,44 @@
+<div class="container product-list-wrapper">
+
+  <section class="filter-bar content-card">
+    <form [formGroup]="filterForm">
+      <mat-form-field appearance="outline">
+        <mat-label>Search products...</mat-label>
+        <input matInput formControlName="search">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Filter by category</mat-label>
+        <mat-select formControlName="category">
+          <mat-option value="all">All Categories</mat-option>
+          <mat-option *ngFor="let category of categories()" [value]="category">
+            {{ category.name| titlecase }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </section>
+
+  <section class="product-content">
+    
+    <div *ngIf="loading()" class="full-page-centered">
+      <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
+    </div>
+
+    <div *ngIf="error() as error" class="full-page-centered error-message">
+      <mat-icon color="warn">error_outline</mat-icon>
+      <h2>Oops! Something went wrong.</h2>
+      <p>{{ error }}</p>
+    </div>
+
+    <ng-container *ngIf="!loading() && !error()">
+      <div *ngIf="products() as productList" class="product-grid">
+        
+        <app-product-card 
+          *ngFor="let product of productList; trackBy: trackByProductId"
+          [product]="product">
+        </app-product-card>
+
+        <div *ngIf="productList.length === 0" class="no-results">
+          <h3>No products found matching your

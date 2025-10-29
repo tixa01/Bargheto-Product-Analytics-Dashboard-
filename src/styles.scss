@@ -1,0 +1,71 @@
+
+@use '@angular/material' as mat;
+
+@use 'variables' as project; 
+@use 'mixins';
+@use 'layout'; 
+
+@include mat.core();
+
+$product-analytics-primary: mat.m2-define-palette(mat.$m2-indigo-palette, 700);
+$product-analytics-accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
+$product-analytics-warn: mat.m2-define-palette(mat.$m2-red-palette);
+
+$product-analytics-theme: mat.m2-define-light-theme((
+  color: (
+    primary: $product-analytics-primary,
+    accent: $product-analytics-accent,
+    warn: $product-analytics-warn,
+  )
+));
+
+$product-analytics-dark-primary: mat.m2-define-palette(mat.$m2-blue-grey-palette, 700);
+$product-analytics-dark-accent: mat.m2-define-palette(mat.$m2-amber-palette, A200, A100, A400);
+$product-analytics-dark-warn: mat.m2-define-palette(mat.$m2-red-palette);
+
+$product-analytics-dark-theme: mat.m2-define-dark-theme((
+  color: (
+    primary: $product-analytics-dark-primary,
+    accent: $product-analytics-dark-accent,
+    warn: $product-analytics-dark-warn,
+  )
+));
+
+@include mat.all-component-themes($product-analytics-theme);
+
+body.dark-theme {
+  @include mat.all-component-themes($product-analytics-dark-theme);
+
+  $color-background: #212121;
+  $color-text: #f5f5f5;
+  $color-border: #424242;
+
+  body {
+    background-color: $color-background;
+    color: $color-text;
+    color: $color-text
+  }
+
+  .content-card {
+    background: #303030;
+    border: 1px solid $color-border;
+  }
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: project.$color-background; 
+  color: project.$color-text;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3 {
+  font-weight: 400;
+  letter-spacing: 1px;
+}

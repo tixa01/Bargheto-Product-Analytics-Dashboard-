@@ -1,0 +1,9 @@
+<ng-container *ngIf="theme$ | async as theme">
+  <button mat-icon-button 
+          (click)="toggleTheme()" 
+          [attr.aria-label]="theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'"
+          [title]="theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'">
+    
+    <mat-icon>{{ theme === 'light' ? 'dark_mode' : 'light_mode' }}</mat-icon>
+  </button>
+</ng-container>

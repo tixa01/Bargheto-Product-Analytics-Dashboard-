@@ -1,0 +1,66 @@
+<div class="container product-details-wrapper">
+
+  <a mat-stroked-button routerLink="/products" class="back-button">
+    <mat-icon>arrow_back</mat-icon>
+    <span>Back to all products</span>
+  </a>
+
+  <div *ngIf="loading()" class="full-page-centered">
+    <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
+  </div>
+
+  <div *ngIf="error() as error" class="full-page-centered error-message">
+    <mat-icon color="warn">error_outline</mat-icon>
+    <h2>Oops! Something went wrong.</h2>
+    <p>{{ error }}</p>
+  </div>
+
+  <ng-container *ngIf="product() as product">
+    <div class="details-grid content-card">
+      
+      <div class="product-gallery">
+        <img [src]="product.thumbnail" [alt]="product.title" class="main-image">
+        <div class="thumbnail-grid">
+          <img *ngFor="let img of product.images.slice(0, 4)" [src]="img" [alt]="product.title + ' thumbnail'">
+        </div>
+      </div>
+
+      <div class="product-info">
+        <span class="product-category">{{ product.category | titlecase }}</span>
+        <h1>{{ product.title }}</h1>
+        <p class="product-brand">Brand: <strong>{{ product.brand }}</strong></p>
+        
+        <p class="product-description">{{ product.description }}</p>
+        
+        <div class="product-meta">
+          <span class="product-price">{{ product.price | currency }}</span>
+          <span class="product-rating">
+            <mat-icon color="accent">star</mat-icon> 
+            {{ product.rating }} / 5.0
+          </span>
+          <span class="product-stock">
+            Only <strong>{{ product.stock }}</strong> left in stock!
+          </span>
+        </div>
+        
+        <button mat-flat-button color="primary" class="buy-button">
+          <mat-icon>add_shopping_cart</mat-icon>
+          Add to Cart
+        </button>
+      </div>
+
+    </div>
+
+    <section class="sales-chart content-card">
+      <h2>Product Analytics</h2>
+      <div class="chart-container">
+        <canvas baseChart
+          [data]="salesChartData()"
+          [options]="salesChartOptions()" [type]="salesChartType">
+        </canvas>
+      </div>
+    </section>
+
+  </ng-container>
+
+</div>

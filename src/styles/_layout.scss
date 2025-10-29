@@ -1,0 +1,33 @@
+@use 'variables' as project;
+@use 'mixins';
+
+.container {
+  width: 100%;
+  padding: 0 project.$spacing-md;
+  margin: 0 auto;
+
+  @include mixins.tablet {
+    max-width: project.$max-content-width;
+    padding: 0 project.$spacing-lg; 
+  }
+}
+
+.content-card {
+  background: #fff;
+  border-radius: project.$border-radius; 
+  border: 1px solid project.$color-border; 
+  padding: project.$spacing-md;
+
+  @include mixins.tablet { 
+    padding: project.$spacing-lg;
+  }
+}
+
+.full-page-centered {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  color: project.$color-text;
+}

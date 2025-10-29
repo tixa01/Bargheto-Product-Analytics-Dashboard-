@@ -1,0 +1,60 @@
+@import 'variables'; 
+@import 'mixins';
+@import 'layout';
+
+:host {
+  display: block;
+}
+
+.product-list-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+.filter-bar {
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-md;
+
+    .mat-mdc-form-field {
+      flex: 1 1 250px;
+      min-width: 250px;
+    }
+  }
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: $spacing-lg;
+}
+
+.full-page-centered {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  color: $color-text;
+}
+
+.error-message {
+  mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    margin-bottom: $spacing-md;
+  }
+  h2 {
+    margin: 0;
+  }
+}
+
+.no-results {
+  grid-column: 1 / -1; 
+  text-align: center;
+  padding: $spacing-xl;
+  color: $color-text;
+}
