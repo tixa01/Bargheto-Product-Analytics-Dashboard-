@@ -4,9 +4,10 @@ import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { catchError, filter, map, switchMap, tap } from 'rxjs/operators';
 import { ProductService } from '../../services/product.service';
-import { ChartConfiguration, ChartType } from 'chart.js';
 import { Chart, BarController, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend } from 'chart.js';
 import { SettingsService } from '../../../../core/services/settings';
+import { BaseChartDirective } from 'ng2-charts';
+import { ChartConfiguration, ChartType, ChartOptions } from 'chart.js';
 
 
 Chart.register(BarController, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
@@ -20,7 +21,6 @@ Chart.register(BarController, BarElement, CategoryScale, LinearScale, Title, Too
 })
 export class ProductDetailsComponent {
   
-
   public loading = signal(true);
   public error = signal<string | null>(null);
 

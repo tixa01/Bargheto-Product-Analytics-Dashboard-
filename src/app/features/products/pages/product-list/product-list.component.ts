@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject, DestroyRef } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, takeUntil, tap } from 'rxjs/operators';
 import { ProductService } from '../../services/product.service';
+import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
+// Import the new operator
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Product } from '../../../models/product.model';
 
 @Component({
@@ -12,9 +13,10 @@ import { Product } from '../../../models/product.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false
 })
-export class ProductListComponent implements OnInit, OnDestroy {
-
+export class ProductListComponent implements OnInit {
+  
   private productService = inject(ProductService);
+  private destroyRef = inject(DestroyRef);
 
   products = this.productService.products;
   categories = this.productService.categories;
@@ -22,12 +24,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
   error = this.productService.error;
 
   filterForm: FormGroup;
-  private destroy$ = new Subject<void>();
 
   constructor() {
     this.filterForm = new FormGroup({
       search: new FormControl(this.productService.query()),
-      category: new FormControl(this.productService.category()), 
+      category: new FormControl(this.productService.category()),
     });
   }
 
@@ -40,14 +41,14 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.filterForm.get('search')?.valueChanges.pipe(
       debounceTime(300),
       distinctUntilChanged(),
-      tap(query => this.productService.setSearchQuery(query)), 
-      takeUntil(this.destroy$)
+      tap(query => this.productService.setSearchQuery(query)),
+      takeUntilDestroyed(this.destroyRef) // <-- MODERN FIX
     ).subscribe();
 
     this.filterForm.get('category')?.valueChanges.pipe(
       distinctUntilChanged(),
-      tap(category => this.productService.setCategory(category)), 
-      takeUntil(this.destroy$)
+      tap(category => this.productService.setCategory(category)),
+      takeUntilDestroyed(this.destroyRef) // <-- MODERN FIX
     ).subscribe();
   }
 
@@ -55,8 +56,4 @@ export class ProductListComponent implements OnInit, OnDestroy {
     return product.id;
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
 }

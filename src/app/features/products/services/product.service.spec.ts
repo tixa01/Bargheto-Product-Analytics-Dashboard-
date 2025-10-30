@@ -3,15 +3,37 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 
 import { ProductService } from './product.service';
 import { ProductApiService } from './product-api.service';
-import { firstValueFrom } from 'rxjs';
-import { take } from 'rxjs/operators';
 import { Product, ProductApiResponse } from '../../models/product.model';
-import { Category } from '../models/mcategory,model';
+import { Category } from '../models/mcategory.model';
 
 
 const MOCK_PRODUCTS: Product[] = [
-  { id: 1, title: 'iPhone 9', category: 'smartphones', price: 549, thumbnail: '', description: '', discountPercentage: 0, rating: 0, stock: 0, brand: '', images: [] },
-  { id: 2, title: 'iPhone X', category: 'smartphones', price: 899, thumbnail: '', description: '', discountPercentage: 0, rating: 0, stock: 0, brand: '', images: [] }
+  { 
+    id: 1, 
+    title: 'iPhone 9', 
+    category: 'smartphones', 
+    price: 549, 
+    thumbnail: 'thumbnail.jpg', 
+    description: 'An Apple mobile which is nothing like Apple', 
+    discountPercentage: 12.96, 
+    rating: 4.69, 
+    stock: 94, 
+    brand: 'Apple', 
+    images: [] 
+  },
+  { 
+    id: 2, 
+    title: 'iPhone X', 
+    category: 'smartphones', 
+    price: 899, 
+    thumbnail: 'thumbnail2.jpg', 
+    description: 'SIM-Free, Model A19211 6.5-inch Super Retina HD display', 
+    discountPercentage: 17.94, 
+    rating: 4.44, 
+    stock: 34, 
+    brand: 'Apple', 
+    images: [] 
+  }
 ];
 
 const MOCK_API_RESPONSE: ProductApiResponse = {

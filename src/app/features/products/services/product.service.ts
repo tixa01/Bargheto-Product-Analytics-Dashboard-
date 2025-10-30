@@ -1,10 +1,10 @@
 import { Injectable, computed, effect, signal, Injector } from '@angular/core';
-import { toObservable } from '@angular/core/rxjs-interop'; // Import this!
+import { toObservable } from '@angular/core/rxjs-interop';
 import { Observable, of } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { ProductApiService } from './product-api.service';
 import { Product } from '../../models/product.model';
-import { Category } from '../models/mcategory,model';
+import { Category } from '../models/mcategory.model';
 
 export interface ProductState {
   products: Product[];

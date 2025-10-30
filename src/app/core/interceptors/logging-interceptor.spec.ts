@@ -12,9 +12,10 @@ describe('LoggingInterceptor', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
+        LoggingInterceptor, 
         {
           provide: HTTP_INTERCEPTORS,
-          useClass: LoggingInterceptor,
+          useClass: LoggingInterceptor, 
           multi: true,
         },
       ],
@@ -34,7 +35,9 @@ describe('LoggingInterceptor', () => {
     const testUrl = '/api/test';
     const mockResponse = { data: 'test data' };
 
+
     httpClient.get(testUrl).subscribe(response => {
+   
       expect(response).toEqual(mockResponse);
 
       expect(consoleLogSpy).toHaveBeenCalledWith(`[Request] GET ${testUrl}`);

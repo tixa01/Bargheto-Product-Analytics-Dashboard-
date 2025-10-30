@@ -5,8 +5,8 @@ import { Products } from './products';
 import { ProductListComponent } from './pages/product-list/product-list.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { SharedModule } from '../../shared/shared-module';
-import { ProductCard } from './components/product-card/product-card';
 import { BaseChartDirective } from 'ng2-charts';
+import { ProductCard } from './components/product-card/product-card.component';
 
 
 @NgModule({
